@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { getForecast } from '../utils/getForecast';
 import { getNextThreeDays } from '../utils/getDate';
-import { Text, View } from 'react-native';
-// import '../../css/components/Weather.scss';
+import { Text, View, StyleSheet } from 'react-native';
 
 export default class Weather extends Component {
     constructor(props){
@@ -56,32 +55,62 @@ export default class Weather extends Component {
         const nextThreeDays = getNextThreeDays();
 
         return (
-            <View className="Weather">
-                <View className="Weather--day Weather--today">
-                    <Text className="Weather--day__title">{'Today'}</Text>
-                    {highs[0] && <Text>{'High: ' + highs[0] + '°F'}</Text>}
-                    {lows[0] && <Text>{ 'Low: ' +  lows[0] + '°F'}</Text>}
-                    {weatherText[0] && <Text>{weatherText[0]}</Text>}
+            <View style={styles.wrappingDiv}>
+                <View style={styles.todayView}>
+                    {highs[0] && lows[0] && <Text style={styles.overview}>{`${highs[0]} °F / ${lows[0]} °F`}</Text>}
+                    {weatherText[0] && <Text style={styles.info}>{weatherText[0]}</Text>}
                 </View>
-                <View className="Weather--day">
-                    {nextThreeDays[0] && <Text className="Weather--day__title">{nextThreeDays[0]}</Text>}
-                    {highs[1] && <Text>{'High: ' + highs[1] + '°F'}</Text>}
-                    {lows[1] && <Text>{ 'Low: ' +  lows[1] + '°F'}</Text>}
-                    {weatherText[1] && <Text>{weatherText[1]}</Text>}
+                <View style={styles.threeDayView}>
+                    {nextThreeDays[0] && <Text style={styles.threeDayText}>{nextThreeDays[0]}</Text>}
+                    {highs[1] && lows[1] && <Text style={styles.threeDayText}>{`${highs[1]} °F / ${lows[1]} °F`}</Text>}
                 </View>
-                <View className="Weather--day">
-                    {nextThreeDays[1] && <Text className="Weather--day__title">{nextThreeDays[1]}</Text>}
-                    {highs[2] && <Text>{'High: ' + highs[2] + '°F'}</Text>}
-                    {lows[2] && <Text>{ 'Low: ' +  lows[2] + '°F'}</Text>}
-                    {weatherText[2] && <Text>{weatherText[2]}</Text>}
+                <View style={styles.threeDayView}>
+                    {nextThreeDays[1] && <Text style={styles.threeDayText}>{nextThreeDays[1]}</Text>}
+                    {highs[2] && lows[2] && <Text style={styles.threeDayText}>{`${highs[2]} °F / ${lows[2]} °F`}</Text>}
                 </View>
-                <View className="Weather--day">
-                    {nextThreeDays[2] && <Text className="Weather--day__title">{nextThreeDays[2]}</Text>}
-                    {highs[3] && <Text>{'High: ' + highs[3] + '°F'}</Text>}
-                    {lows[3] && <Text>{ 'Low: ' +  lows[3] + '°F'}</Text>}
-                    {weatherText[3] && <Text>{weatherText[3]}</Text>}
+                <View style={styles.threeDayView}>
+                    {nextThreeDays[2] && <Text style={styles.threeDayText}>{nextThreeDays[2]}</Text>}
+                    {highs[3] && lows[3] && <Text style={styles.threeDayText}>{`${highs[3]} °F / ${lows[3]} °F`}</Text>}
                 </View>
             </View>
         );
     }
 }
+
+const styles = StyleSheet.create({
+    wrappingDiv: {
+        marginTop: 20,
+        flex: 1,
+        flexDirection: 'column',
+        alignItems: 'flex-start'
+    },
+    overview: {
+        fontSize: 16,
+        paddingBottom: 25,
+        textAlign: 'center'
+    },
+    info: {
+        paddingRight: 20,
+        paddingLeft: 20,
+        fontSize: 14,
+        lineHeight: 21
+    },
+    todayView: {
+        paddingTop: 20,
+        height: 200,
+        borderWidth: 1,
+        borderColor: 'black'
+    },
+    threeDayView: {
+        alignSelf: 'stretch',
+        marginTop: 10,
+        marginBottom: 10,
+        paddingTop: 20,
+        height: 70,
+        borderWidth: 1,
+        borderColor: 'black'
+    },
+    threeDayText: {
+        textAlign: 'center'
+    }
+});

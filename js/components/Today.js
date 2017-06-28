@@ -1,16 +1,28 @@
 import React, { PropTypes } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
 import { getDateToday } from '../utils/getDate';
-// import '../../css/components/Today.scss';
 
 const Today = () => {
     const fullDate = getDateToday();
 
     return(
-        <View className="Date">
-            <Text>{fullDate}</Text>
+        <View style={styles.date}>
+            <Text style={styles.dateText}>{fullDate}</Text>
         </View>
     );
 };
 
 export default Today;
+
+const styles = StyleSheet.create({
+    dateView: {
+        flexDirection: 'row',
+        width: 600,
+        flex: 1
+    },
+    dateText: {
+        fontSize: 18,
+        textAlign: 'center',
+        marginTop: 50
+    }
+});
